@@ -1,0 +1,28 @@
+{
+  "name": "authorizer",
+  "description": "Lightweight connect based authorization middleware",
+  "version": "",
+  "author": "Martin Croné <martin@nreality.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nReality/authorizerjs.gi"
+  },
+  "homepage": "https://github.com/nReality/authorizerjs",
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "methods": "~0.1.0",
+    "connect": "~2.12.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "test",
+    "bdd",
+    "assert"
+  ],
+  "main": "./lib/node.js",
+  "engines": {
+    "node": ">= 0.2.0"
+  }
+}
