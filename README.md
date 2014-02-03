@@ -1,4 +1,4 @@
-authorizerjs
+authorizer
 ============
 
-Lightweight connect based authorization middleware for node.js
+Lightweight connect based authorization middleware.
