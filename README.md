@@ -20,7 +20,7 @@ var express    = require('express')
 var passport   = require('passport');
 var authorizer = require('authorizer');
 
-var map = [
+var routes = [
 	{method : 'delete',   path : '/api*',         check : function(req) {return req.user.isAdmin();}},
 	{method : 'post',     path : '/api/resource', check : function(req) {return req.user.isAdmin();}},
 	{method : 'post',     path : '/api/auth*',    check : authorizer.assertAlwaysOpen},
@@ -39,7 +39,7 @@ app.configure(function() {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	app.use(authorizer(map));
+	app.use(authorizer(routes));
 	app.use(app.router);
 });
 ```
