@@ -9,7 +9,7 @@ describe('matches GET and POST but not DELETE', function() {
 	var runner = new MiddlewareRunner(map);
 
 	it('should deny DELETE requests', function(done) {
-		runner.runWithCheck(runner.makeReq("DELETE"), 401, done);
+		runner.runWithCheck(runner.makeReq("DELETE"), 403, done);
 	});
 
 	it('should allow POST requests', function(done) {
@@ -43,7 +43,7 @@ describe('no match found in router', function() {
 	});
 
 	it('should deny GET request for the-other-path', function(done) {
-		runner.runWithCheck(runner.makeReq("GET", "http://host/the-other-path"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET", "http://host/the-other-path"), 403, done);
 	});
 });
 
@@ -53,11 +53,11 @@ describe('no match found in router', function() {
 	var runner = new MiddlewareRunner(map);
 
 	it('should deny access to GET requests', function(done) {
-		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET"), 403, done);
 	});
 
 	it('should deny access to POST requests', function(done) {
-		runner.runWithCheck(runner.makeReq("POST"), 401, done);
+		runner.runWithCheck(runner.makeReq("POST"), 403, done);
 	});
 });
 
@@ -67,11 +67,11 @@ describe('empty map passed in', function() {
 	var runner = new MiddlewareRunner(map);
 
 	it('should deny access to GET requests', function(done) {
-		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET"), 403, done);
 	});
 
 	it('should deny access to POST requests', function(done) {
-		runner.runWithCheck(runner.makeReq("POST"), 401, done);
+		runner.runWithCheck(runner.makeReq("POST"), 403, done);
 	});
 });
 
@@ -94,11 +94,11 @@ describe('map restricts access to all methods and paths', function() {
 	var runner = new MiddlewareRunner(map);
 
 	it('should deny GET requests', function(done) {
-		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET"), 403, done);
 	});
 
 	it('should deny POST requests', function(done) {
-		runner.runWithCheck(runner.makeReq("POST"), 401, done);
+		runner.runWithCheck(runner.makeReq("POST"), 403, done);
 	});
 });
 
@@ -114,7 +114,7 @@ describe('matches using custom assertion', function() {
 
 	it('should deny when assertion returns false', function(done) {
 		shouldAllow = false;
-		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET"), 403, done);
 	});
 });
 
@@ -126,7 +126,7 @@ describe('force error', function() {
 
 	it('should deny when assertion returns false', function(done) {
 		shouldAllow = false;
-		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+		runner.runWithCheck(runner.makeReq("GET"), 403, done);
 	});
 });
 
