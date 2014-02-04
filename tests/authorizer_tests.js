@@ -1,46 +1,8 @@
+var authorizer = require('../');
 var should = require('should');
-var authorizer = require('../lib/authorizer');
 var chai = require('chai');
 
 chai.use(require('chai-connect-middleware'));
-
-function MiddlewareRunner(map) {
-
-	var me = this;
-	
-	this.map = map;
-	this.authorizer = authorizer(me.map);
-	
-	this.run = function(req, done) {
-		var res;
-		chai.connect.use(me.authorizer)
-			.req(function(r) {
-				r.method = req.method,
-				r.url = req.url
-			})
-			.res(function(r) {
-				r.send = function(data) {};
-				res = r;
-			})
-			.next(function (e) {
-				done(e, res);
-			})
-			.dispatch();
-	};
-	this.runWithCheck = function (req, statusCode, done) {
-		me.run(req, function(err, res) {
-			if(statusCode == 200)
-				should.not.exist(err);
-			res.statusCode.should.equal(statusCode);
-			done();
-		});
-	}
-	this.makeReq = function(method, url) {
-		if(!url)
-			url = "http://host/path";
-		return {url: url, method : method};	
-	}
-}
 
 describe('matches GET and POST but not DELETE', function() {
 	var map = [{method : 'get,post', path : '*', check : authorizer.assertAlwaysOpen}];
@@ -113,7 +75,6 @@ describe('empty map passed in', function() {
 	});
 });
 
-
 describe('map allows access to all methods and paths', function() {
 
 	var map = [{method : '*', path : '*', check : authorizer.assertAlwaysOpen}];
@@ -158,3 +119,51 @@ describe('matches using custom assertion', function() {
 });
 
 
+describe('force error', function() {
+	var shouldAllow;
+	var map = [{method : '*', path : '*', check : function(req) { throw new Error('Forced error');}}];
+	var runner = new MiddlewareRunner(map);
+
+	it('should deny when assertion returns false', function(done) {
+		shouldAllow = false;
+		runner.runWithCheck(runner.makeReq("GET"), 401, done);
+	});
+});
+
+function MiddlewareRunner(map) {
+
+	var me = this;
+	
+	this.map = map;
+	this.authorizer = authorizer(me.map);
+	
+	this.run = function(req, done) {
+		var res;
+		chai.connect.use(me.authorizer)
+			.req(function(r) {
+				r.method = req.method,
+				r.url = req.url
+			})
+			.res(function(r) {
+				r.send = function(data) {};
+				res = r;
+			})
+			.next(function (e) {
+				done(e, res);
+			})
+			.dispatch();
+	};
+	this.runWithCheck = function (req, statusCode, done) {
+		me.run(req, function(err, res) {
+			if(statusCode == 200)
+				should.not.exist(err);
+			res.statusCode.should.equal(statusCode);
+			done();
+		});
+	}
+	this.makeReq = function(method, url) {
+		if(!url)
+			url = "http://host/path";
+		return {url: url, method : method};	
+	}
+}
