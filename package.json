@@ -1,7 +1,7 @@
 {
   "name": "authorizer",
   "description": "Lightweight connect based authorization middleware with express-style routing.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Martin Cronjé <martin@nreality.com>",
   "repository": {
     "type": "git",
