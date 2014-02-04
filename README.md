@@ -24,8 +24,8 @@ var routes = [
 	{method : 'delete',   path : '/api*',         check : function(req) {return req.user.isAdmin();}},
 	{method : 'post',     path : '/api/resource', check : function(req) {return req.user.isAdmin();}},
 	{method : 'post',     path : '/api/auth*',    check : authorizer.assertAlwaysOpen},
-	{method : 'get,post', path : '/api*',         check : authorizer.assertIsAuth},
-	{method : '*',        path : '*',             check : function(req) {return req.isAuthenticated();}}
+	{method : 'get,post', path : '/api*',         check : function(req) {return req.isAuthenticated();}}
+	{method : '*',        path : '*',             check : authorizer.assertAlwaysClosed}
 ];
 	
 app.configure(function() {
