@@ -1,7 +1,7 @@
 {
   "name": "authorizer",
-  "description": "Lightweight connect based authorization middleware",
-  "version": "",
+  "description": "Lightweight connect based authorization middleware with express-style routing.",
+  "version": "0.0.1",
   "author": "Martin Cronjé <martin@nreality.com>",
   "repository": {
     "type": "git",
@@ -22,12 +22,11 @@
     "chai-connect-middleware": "*"
   },
   "keywords": [
-    "test",
-    "bdd",
-    "assert"
+    "connect",
+    "authorization"
+    "middleware"
   ],
-  "main": "./lib/node.js",
   "engines": {
-    "node": ">= 0.2.0"
-  }
+    "node": "0.10.x"
+  },
 }
