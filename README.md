@@ -6,15 +6,12 @@ Lightweight connect based authorization middleware.
 This library was extracted from an internal project where our authorization requirements where extremely simple. Large and more feature-rich libraries seemed like overkill. We also wanted something that is expressive and consistent with express.js' routes.
 
 ###Installation
-============
-_Package not added to npm yet._
 
 ```sh
-git clone https://github.com/nReality/authorizerjs
+npm install authorizer --save
 ```
 
 ###Example
-============
 
 This example makes use of passport.js for authentication
 
