@@ -23,7 +23,7 @@
   },
   "keywords": [
     "connect",
-    "authorization"
+    "authorization",
     "middleware"
   ],
   "engines": {
