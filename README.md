@@ -35,7 +35,7 @@ app.configure(function() {
 	app.use(express.methodOverride());
 
 	app.use(express.cookieParser()); 
-	app.use(express.session({ secret: 'Some secet' })); 
+	app.use(express.session({ secret: 'Some secret' })); 
 	app.use(passport.initialize());
 	app.use(passport.session());
 
